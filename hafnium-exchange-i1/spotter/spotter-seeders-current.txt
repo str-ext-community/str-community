@@ -1,0 +1,17 @@
+rg_functionality = "Endpoint Management Systems" AND baseeventid = "11" AND (filepath CONTAINS "inetpub\wwwroot" OR filepath CONTAINS "FrontEnd\HttpProxy") AND (filepath ENDS WITH ".aspx" OR filepath ENDS WITH ".dll" OR filepath ENDS WITH ".asmx" OR filepath ENDS WITH ".asax") | rare  filepath
+
+rg_functionality = "Endpoint Management Systems" AND baseeventid = "1" AND destinationprocessname ENDS WITH "cmd.exe" AND resourcecustomfield1 CONTAINS "echo [S]&cd&echo [E]"
+
+rg_functionality = "Endpoint Management Systems" AND baseeventid = "1" AND (sourceprocessname ENDS WITH "UMWorkerProcess.exe" OR sourceprocessname ENDS WITH "UMService.exe") AND ((destinationprocessname NOT ENDS WITH "werfault.exe" OR destinationprocessname NOT ENDS WITH "wermgr.exe"))
+
+rg_functionality = "Endpoint Management Systems" AND baseeventid = "1" AND destinationprocessname ENDS WITH "rundll32.exe" AND resourcecustomfield1 CONTAINS "comsvcs.dll" AND resourcecustomfield1 CONTAINS "minidump"
+
+rg_functionality = "Endpoint Management Systems" AND baseeventid = "1" AND sourceprocessname ENDS WITH "w3wp.exe" | rare  destinationprocessname
+
+rg_functionality = "Endpoint Management Systems" AND baseeventid = "1" AND resourcecustomfield1 CONTAINS "attrib" AND resourcecustomfield1 CONTAINS " +h " AND resourcecustomfield1 CONTAINS " +s " AND resourcecustomfield1 CONTAINS " +r " AND resourcecustomfield1 CONTAINS ".aspx"
+
+rg_functionality = "Endpoint Management Systems" AND baseeventid = "1" AND resourcecustomfield1 CONTAINS "system.net.sockets.tcpclient"
+
+rg_functionality = "Web Server" AND message CONTAINS "Set-" AND message CONTAINS "VirtualDirectory"
+
+rg_functionality = "Microsoft Windows" AND message CONTAINS "System.InvalidCastException"

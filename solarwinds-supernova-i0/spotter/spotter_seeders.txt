@@ -1,0 +1,23 @@
+((baseeventid = "1" OR baseeventid = "4688") AND (rg_functionality = "Microsoft Windows" OR rg_functionality = "Endpoint Management Systems") AND destinationprocessname = "csc.exe" AND sourceprocessname = "w3wp.exe" AND (resourcecustomfield2 CONTAINS "SolarWinds Orion Application Pool"))
+
+(rg_functionality = "Web Server" AND (requesturl CONTAINS "logoimagehandler.ashx") AND requesturl CONTAINS "codes" AND requesturl CONTAINS "clazz" AND requesturl CONTAINS "method" AND requesturl CONTAINS "args")
+
+((baseeventid = "1" OR baseeventid = "4688") AND (rg_functionality = "Microsoft Windows" OR rg_functionality = "Endpoint Management Systems") AND (filehash = "c15abaf51e78ca56c0376522d699c978217bf041a3bd3c71d09193efa5717c71"))
+
+((baseeventid = "1" OR baseeventid = "4688") AND (rg_functionality = "Microsoft Windows" OR rg_functionality = "Endpoint Management Systems") AND  destinationprocessname="csc.exe"| rare  sourceprocessname
+
+((baseeventid = "1" OR baseeventid = "4688") AND (rg_functionality = "Microsoft Windows" OR rg_functionality = "Endpoint Management Systems") AND sourceprocessname = "w3wp.exe" | rare destinationprocessname
+
+((baseeventid = "1" OR baseeventid = "4688") AND (rg_functionality = "Microsoft Windows" OR rg_functionality = "Endpoint Management Systems") AND sourceprocessname = "solarwinds.businesslayerhost.exe" | rare destinationprocessname
+
+(rg_functionality = "Web Server" AND ((requesturl CONTAINS "WebResource.axd" OR requesturl CONTAINS "ScriptResource.axd" OR requesturl CONTAINS "i18n.ashx" OR requesturl CONTAINS "Skipi18n") AND (requesturl NOT CONTAINS "Orion/Skipi18n/Profiler")) AND ((requesturl NOT CONTAINS "css.i18n.ashx" OR requesturl NOT CONTAINS "js.i18n.ashx")))
+
+(rg_functionality = "Web Server" AND (requesturl CONTAINS "GZipStream" OR requesturl CONTAINS "DeflateStream"))
+
+resourcegroupname = "Osquery" AND filepath STARTS WITH C:\Users\  AND filepath ENDS WITH ".dll" | rare filepath
+
+rg_functionality = "Web Server" AND (requesturl CONTAINS ".ashx" OR requesturl CONTAINS ".axd") AND flowsiemid = "500" | rare requestclientapplication requesturl  
+
+rg_functionality = "Endpoint Management Systems" AND baseeventid = "1" AND (sourceprocessname ENDS WITH "w3wp.exe") AND (destinationprocessname ENDS WITH "net.exe" OR destinationprocessname ENDS WITH "ping.exe" OR destinationprocessname ENDS WITH "systeminfo.exe" OR destinationprocessname ENDS WITH "hostname.exe" OR destinationprocessname ENDS WITH "whoami.exe" OR destinationprocessname ENDS WITH "cmd.exe")  | rare sourceprocessname destinationprocessname
+
+rg_functionality = "Endpoint Management Systems" AND baseeventid = "3" AND  destinationprocessname ENDS WITH "w3wp.exe"  AND destinationaddress NOT STARTS WITH "10." AND destinationaddress NOT STARTS WITH "192.168." AND destinationaddress NOT STARTS WITH "172.16." AND destinationaddress NOT STARTS WITH "172.17." AND destinationaddress NOT STARTS WITH "172.18." AND destinationaddress NOT STARTS WITH "172.19." AND destinationaddress NOT STARTS WITH "172.20." AND destinationaddress NOT STARTS WITH "172.21." AND destinationaddress NOT STARTS WITH "172.22." AND destinationaddress NOT STARTS WITH "172.23." AND destinationaddress NOT STARTS WITH "172.24." AND destinationaddress NOT STARTS WITH "172.25." AND destinationaddress NOT STARTS WITH "172.26." AND destinationaddress NOT STARTS WITH "172.27." AND destinationaddress NOT STARTS WITH "172.28." AND destinationaddress NOT STARTS WITH "172.29." AND destinationaddress NOT STARTS WITH "172.30." AND destinationaddress NOT STARTS WITH "172.31." AND destinationaddress NOT STARTS WITH "127." AND destinationaddress NOT STARTS WITH "0:0:0:0:0:0:0:1"

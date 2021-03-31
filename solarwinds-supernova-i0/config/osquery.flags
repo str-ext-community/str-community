@@ -1,0 +1,5 @@
+--disable_events=false
+--enable_windows_events_publisher=true
+--enable_windows_events_subscriber=true
+--enable_ntfs_event_publisher=true
+--verbose

