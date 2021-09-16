@@ -1,0 +1,9 @@
+index=activity AND rg_functionality="Endpoint Management Systems" AND (baseeventid=1 OR deviceaction="ProcessRollup2" OR deviceaction="WmiCreateProcess" OR deviceaction="Trace Executed Process" OR deviceaction="Process" OR deviceaction="Childproc" OR deviceaction="Procstart" OR deviceaction="Process Activity: Launched") AND (sourceprocessname CONTAINS tomcat AND resourcecustomfield2  CONTAINS Atlassian) OR  (sourceprocessname CONTAINS java AND resourcecustomfield2  CONTAINS confluence) | rare destinationprocessname
+
+index=activity AND rg_functionality = Next Generation Firewall AND (requesturl CONTAINS "/pages/doenterpagevariables.action" OR requesturl CONTAINS "/pages/createpage-entervariables.action" OR requesturl CONTAINS "/pages/createpage.action" OR requesturl CONTAINS "/confluence/pages/createpage-entervariables.action" OR requesturl CONTAINS "/pages/templates2/viewpagetemplate.action")
+
+index=activity AND rg_functionality = Next Generation Firewall AND destinationhostname ENDS WITH "minergate.com"
+
+index=activity AND rg_functionality = Next Generation Firewall AND (requestclientapplication CONTAINS XMRig OR requestclientapplication CONTAINS ccminer) 
+
+index=activity AND rg_functionality =  Microsoft Windows  AND baseeventid = "7045" AND ^str_devicecustomstring4_servicefilename ENDS WITH "WinRing0x64.sys"
